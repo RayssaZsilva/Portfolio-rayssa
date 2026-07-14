@@ -377,10 +377,15 @@ font-size:3rem;
 
 }
 
-.menu{
+.menu {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-display:none;
-
+.menu a {
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .avatar3d{
