@@ -1,124 +1,72 @@
 import { motion } from "framer-motion";
-
 import ProjectCard from "./ProjectCard";
 
 export default function Projects() {
-
   const projetos = [
-
     {
-
-      titulo: "🎓 TopUm",
-
+      titulo: "🏨 Achô",
       descricao:
-
-      "Aplicativo para organizar tarefas escolares, acompanhar atividades e gerenciar prazos.",
-
+        "Plataforma de busca de hospedagens com pesquisa por cidade, detalhes dos hotéis, favoritos, login, cadastro, perfil de usuário e persistência de dados com LocalStorage.",
       tecnologias: [
-
         "React",
-
-        "Firebase",
-
-        "Tailwind"
-
-      ]
-
+        "TypeScript",
+        "Vite",
+        "React Router",
+        "React Leaflet",
+        "CSS",
+        "LocalStorage",
+      ],
+      linkDemo: "https://acho-ten.vercel.app/",
+      linkGithub: "COLE_AQUI_O_LINK_DO_REPOSITORIO",
+      destaque: true,
     },
-
     {
-
-      titulo: "🏪 Izipis",
-
+      titulo: "🎓 TopUm",
       descricao:
-
-      "Sistema PDV para mini mercado com gerenciamento de produtos e vendas.",
-
-      tecnologias: [
-
-        "React",
-
-        "JavaScript",
-
-        "SQLite"
-
-      ]
-
-    }
-
+        "Aplicativo para organizar tarefas escolares, acompanhar atividades e gerenciar prazos.",
+      tecnologias: ["React", "Firebase", "Tailwind"],
+      linkDemo: "",
+      linkGithub: "",
+    },
+    {
+      titulo: "🏪 Izipis",
+      descricao:
+        "Sistema PDV para minimercado com gerenciamento de produtos e vendas.",
+      tecnologias: ["React", "JavaScript", "SQLite"],
+      linkDemo: "https://acho-ten.vercel.app/",
+      linkGithub: "https://github.com/RayssaZsilva/Acho.git",
+    },
   ];
 
   return (
-
-    <section
-
-      id="projetos"
-
-      className="projects container"
-
-    >
-
+    <section id="projetos" className="projects container">
       <motion.div
-
         initial={{
-
-          opacity:0,
-
-          y:40
-
+          opacity: 0,
+          y: 40,
         }}
-
         whileInView={{
-
-          opacity:1,
-
-          y:0
-
+          opacity: 1,
+          y: 0,
         }}
-
         transition={{
-
-          duration:.8
-
+          duration: 0.8,
         }}
-
         viewport={{
-
-          once:true
-
+          once: true,
         }}
-
       >
-
-        <h2>
-
-          Meus Projetos
-
-        </h2>
+        <h2>Meus Projetos</h2>
 
         <div className="projects-grid">
-
-          {
-
-            projetos.map((projeto)=>(
-
-              <ProjectCard
-
-                key={projeto.titulo}
-
-                {...projeto}
-
-              />
-
-            ))
-
-          }
-
+          {projetos.map((projeto) => (
+            <ProjectCard
+              key={projeto.titulo}
+              {...projeto}
+            />
+          ))}
         </div>
-
       </motion.div>
-
     </section>
-
   );
 }

@@ -1,56 +1,79 @@
 import { motion } from "framer-motion";
-import { FiExternalLink, FiGithub } from "react-icons/fi"; // Certifique-se de ter rodado npm install react-icons
+import {
+  FiExternalLink,
+  FiGithub,
+} from "react-icons/fi";
 
 export default function ProjectCard({
   titulo,
   descricao,
   tecnologias,
-  linkDemo,    // Adicionado aqui para o React reconhecer o link
-  linkGithub   // Adicionado aqui para o React reconhecer o link
+  linkDemo,
+  linkGithub,
+  destaque = false,
 }) {
   return (
-    <motion.div
+    <motion.article
       whileHover={{
         y: -10,
-        scale: 1.02
+        scale: 1.02,
       }}
       transition={{
-        duration: .3
+        duration: 0.3,
       }}
-      className="project-card"
+      className={`project-card ${
+        destaque ? "project-card-featured" : ""
+      }`}
     >
-      <div className="project-glow"/>
+      <div className="project-glow" />
 
-      <h3>
-        {titulo}
-      </h3>
+      {destaque && (
+        <span className="project-highlight">
+          Projeto em destaque
+        </span>
+      )}
 
-      <p>
-        {descricao}
-      </p>
+      <h3>{titulo}</h3>
+
+      <p>{descricao}</p>
 
       <div className="techs">
-        {
-          tecnologias.map((tech) => (
-            <span key={tech}>
-              {tech}
-            </span>
-          ))
-        }
+        {tecnologias.map((tech) => (
+          <span key={tech}>
+            {tech}
+          </span>
+        ))}
       </div>
 
-      <div className="project-links">
-        
-        <a href={linkDemo || "#"} target="_blank" rel="noopener noreferrer" className="btn-demo">
-          <FiExternalLink /> Acessar
-        </a>
+      {(linkDemo || linkGithub) && (
+        <div className="project-links">
+          {linkDemo && (
+            <a
+              href={linkDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-demo"
+              aria-label={`Acessar demonstração do projeto ${titulo}`}
+            >
+              <FiExternalLink />
+              Acessar
+            </a>
+          )}
 
-        <a href={linkGithub || "#"} target="_blank" rel="noopener noreferrer" className="btn-github">
-          <FiGithub /> Repositório
-        </a>
-
-      </div>
-
-    </motion.div>
+          {linkGithub && (
+            <a
+              href={linkGithub}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-github"
+              aria-label={`Abrir repositório do projeto ${titulo}`}
+            >
+              <FiGithub />
+              Repositório
+            </a>
+          )}
+        </div>
+      )}
+    </motion.article>
   );
 }
