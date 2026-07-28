@@ -4,11 +4,11 @@
 Meu Portfólio
 </h1>
 
-<p align="center">
+<h3 align="center">
 Um portfólio moderno e responsivo desenvolvido para apresentar minha trajetória, habilidades, projetos e formas de contato.
-</p>
+</h3>
 
-<!-- ![Preview](./public/preview.png) -->
+![Preview](./public/preview/preview.png)
 
 ---
 <h1>
