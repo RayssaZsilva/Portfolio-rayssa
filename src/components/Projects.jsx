@@ -17,24 +17,22 @@ export default function Projects() {
         "LocalStorage",
       ],
       linkDemo: "https://acho-ten.vercel.app/",
-      linkGithub: "COLE_AQUI_O_LINK_DO_REPOSITORIO",
+      linkGithub: "https://github.com/RayssaZsilva/Acho/blob/main/README.md",
       destaque: true,
     },
     {
       titulo: "🎓 TopUm",
       descricao:
-        "Aplicativo para organizar tarefas escolares, acompanhar atividades e gerenciar prazos.",
+        "Aplicativo para organizar tarefas escolares, acompanhar atividades e gerenciar prazos. Desenvolvido em grupo",
       tecnologias: ["React", "Firebase", "Tailwind"],
-      linkDemo: "",
-      linkGithub: "",
+      linkGithub: "https://github.com/RayssaZsilva",
     },
     {
       titulo: "🏪 Izipis",
       descricao:
         "Sistema PDV para minimercado com gerenciamento de produtos e vendas.",
       tecnologias: ["React", "JavaScript", "SQLite"],
-      linkDemo: "https://acho-ten.vercel.app/",
-      linkGithub: "https://github.com/RayssaZsilva/Acho.git",
+      linkGithub: "https://github.com/Engenharia-de-Requisitos-CIC-5/Izipis.git",
     },
   ];
 
