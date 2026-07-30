@@ -18,9 +18,13 @@ export default function Navbar() {
       setScroll(window.scrollY > 30);
     };
 
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   function goTo(id) {
@@ -28,22 +32,31 @@ export default function Navbar() {
 
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
+      block: "start",
     });
   }
 
   return (
-    <header className={scroll ? "navbar navbar-scroll" : "navbar"}>
+    <header className={`navbar ${scroll ? "navbar-scroll" : ""}`}>
       <div className="container navbar-content">
-
-        <div className="logo">
+        <button
+          className="logo"
+          type="button"
+          onClick={() => goTo("home")}
+          aria-label="Voltar ao início"
+        >
           <span>R</span>
           <h2>Rayssa</h2>
-        </div>
+        </button>
 
-        <nav className={open ? "menu active" : "menu"}>
+        <nav
+          className={`menu ${open ? "active" : ""}`}
+          aria-label="Navegação principal"
+        >
           {links.map((item) => (
             <button
               key={item.id}
+              type="button"
               onClick={() => goTo(item.id)}
             >
               {item.name}
@@ -53,11 +66,13 @@ export default function Navbar() {
 
         <button
           className="mobile-button"
-          onClick={() => setOpen(!open)}
+          type="button"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
         >
-          {open ? <X size={26}/> : <Menu size={26}/>}
+          {open ? <X size={26} /> : <Menu size={26} />}
         </button>
-
       </div>
     </header>
   );
