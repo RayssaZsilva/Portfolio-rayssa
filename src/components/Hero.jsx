@@ -1,94 +1,88 @@
 import { motion } from "framer-motion";
-
 import Avatar3D from "./Avatar3D";
-
-import CalendarCard from "./CalendarioCard.jsx";
+import CalendarioCard from "./CalendarioCard";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Hero() {
-
   return (
+    <section className="hero container" id="home">
 
-    <section className="hero container">
+      <motion.div
+        className="hero-left"
+        initial={{ opacity: 0, x: -80 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: .8 }}
+      >
 
-      <div className="hero-left">
+        <span className="hero-badge">
+          👋 Olá, eu sou
+        </span>
 
-        <motion.h1
+        <h1>
+          Rayssa
+          <br />
+          <span>Silva</span>
+        </h1>
 
-          initial={{ opacity: 0, y: 40 }}
+        <h2>
+          Desenvolvedora Front-end
+        </h2>
 
-          animate={{ opacity: 1, y: 0 }}
-
-          transition={{ duration: 1 }}
-
-        >
-
-          Bem-vindo ao meu portfólio
-
-        </motion.h1>
-
-        <motion.h2
-
-          initial={{ opacity: 0 }}
-
-          animate={{ opacity: 1 }}
-
-          transition={{ delay: 0.4 }}
-
-        >
-
-          Rayssa Silva
-
-        </motion.h2>
-
-        <motion.p
-
-          initial={{ opacity: 0 }}
-
-          animate={{ opacity: 1 }}
-
-          transition={{ delay: 0.7 }}
-
-        >
-
-          Desenvolvedora em formação.
-
-        </motion.p>
+        <p>
+          Estudante de Ciência da Computação apaixonada por criar
+          interfaces modernas, responsivas e experiências que unem
+          design e tecnologia.
+        </p>
 
         <div className="hero-buttons">
 
-          <a href="#projetos">
-
-            <button className="primary">
-
-              Ver Projetos
-
-            </button>
-
+          <a
+            href="#projects"
+            className="primary"
+          >
+            Ver Projetos
           </a>
 
-          <a href="#sobre">
-
-            <button className="secondary">
-
-              Sobre Mim
-
-            </button>
-
+          <a
+            href="/curriculo.pdf"
+            className="secondary"
+          >
+            Download CV
           </a>
 
         </div>
 
-        <CalendarCard />
+        <div className="hero-social">
 
-      </div>
+          <a href="#">
+            <FaGithub />
+          </a>
 
-      <div className="hero-right">
+          <a href="#">
+            <FaLinkedin />
+          </a>
+
+        </div>
+
+      </motion.div>
+
+      <motion.div
+        className="hero-right"
+        initial={{ opacity:0, scale:.8 }}
+        animate={{ opacity:1, scale:1 }}
+        transition={{ duration:1 }}
+      >
+
+        <div className="hero-glow"></div>
 
         <Avatar3D />
 
-      </div>
+        <div className="calendar-position">
+          <CalendarioCard/>
+        </div>
+
+      </motion.div>
 
     </section>
-
   );
 }

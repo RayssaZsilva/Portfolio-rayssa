@@ -1,37 +1,109 @@
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Center } from "@react-three/drei";
-import { Suspense } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Float,
+  Environment,
+  ContactShadows,
+  Sparkles,
+  useGLTF,
+} from "@react-three/drei";
+import { useRef } from "react";
 
-function Model() {
-  const { scene } = useGLTF("/models/cute_rabbit.glb"); 
+function Bunny() {
+  const model = useGLTF("/models/cute_rabbit.glb");
+  const group = useRef();
+
+  useFrame((state) => {
+    if (!group.current) return;
+
+    const rotacaoBase = 0;
+
+    group.current.rotation.y +=
+      (rotacaoBase +
+        state.pointer.x * 0.25 -
+        group.current.rotation.y) *
+      0.05;
+
+    group.current.rotation.x +=
+      (-state.pointer.y * 0.08 -
+        group.current.rotation.x) *
+      0.05;
+  });
+
   return (
-    <Center>
-      <primitive object={scene} scale={1.2} /> {/* Reduzi um pouco a escala para não cortar as orelhas */}
-    </Center>
+    <group
+      ref={group}
+      rotation={[0, 0, 0]}
+      position={[0, -0.48, 0]}
+      scale={1.75}
+    >
+      <primitive object={model.scene} />
+    </group>
   );
 }
 
 export default function Avatar3D() {
   return (
-    <div className="avatar3d" style={{ width: "100%", height: "750px" }}>
+    <div className="avatar3d">
+      <div className="avatar-pedestal" />
 
-      <Canvas camera={{ position:[0, 0, 5], fov: 45 }} gl={{ alpha: true }}>
+      <Canvas
+        camera={{
+          position: [0, 0.2, 6.8],
+          fov: 42,
+        }}
+      >
         <ambientLight intensity={1.5} />
-        
-        <directionalLight position={[5, 5, 5]} intensity={2} />
-        <pointLight position={[-5, -5, -5]} intensity={1} />
 
+        <directionalLight
+          intensity={2}
+          position={[4, 5, 4]}
+        />
 
-        <Suspense fallback={null}>
-          <Model />
-        </Suspense>
+        <pointLight
+          intensity={25}
+          position={[0, 2, 2]}
+          color="#a855f7"
+        />
 
-        <OrbitControls 
-          enableZoom={false} 
-          autoRotate 
-          autoRotateSpeed={1.5} 
+        <Environment preset="city" />
+
+        <Float
+          speed={2}
+          rotationIntensity={0.15}
+          floatIntensity={0.35}
+        >
+
+          <mesh
+  position={[0, -2.02, 0]}>
+  <cylinderGeometry args={[1.05, 1.05, 0.14, 64]} />
+
+  <meshStandardMaterial
+    color="#c084fc"
+    emissive="#7c3aed"
+    emissiveIntensity={0.35}
+    metalness={0.2}
+    roughness={0.3}
+  />
+</mesh>
+          <Bunny />
+        </Float>
+
+        <Sparkles
+          count={80}
+          size={2}
+          speed={0.3}
+          scale={5}
+        />
+
+        <ContactShadows
+          position={[0, -2.12, 0]}
+          blur={2.5}
+          opacity={0.45}
+          scale={5}
         />
       </Canvas>
     </div>
   );
 }
+
+useGLTF.preload("/models/cute_rabbit.glb");

@@ -1,41 +1,34 @@
+import "./index.css";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Background from './components/Background';
-import CustomCursor from "./components/CustomCursor";
-import Socials from "./components/Socials";
-import Projects from "./components/Projects";
-import Footer from "./components/Footer";   
-
-
-
-
 import About from "./components/About";
 import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Socials from "./components/Socials";
+import Footer from "./components/Footer";
+
+import Background from "./components/Background";
+import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
-    <>
-    <Background/>
+    <div className="app">
+      <Background />
+      <CustomCursor />
 
-    <CustomCursor/>
+      <Navbar />
 
-    <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Socials />
+      </main>
 
-    <Hero />
-
-    <About/>
-
-    <Projects /> 
-
-    <Skills/>
-
-    <Socials/>
-
-    <Footer />
-
-      
-
- </>
+      <Footer />
+    </div>
   );
 }
 
