@@ -17,24 +17,22 @@ function Bunny() {
 
     const rotacaoBase = 0;
 
+    const rotacaoY = rotacaoBase + state.pointer.x * 0.25;
+    const rotacaoX = -state.pointer.y * 0.08;
+
     group.current.rotation.y +=
-      (rotacaoBase +
-        state.pointer.x * 0.25 -
-        group.current.rotation.y) *
-      0.05;
+      (rotacaoY - group.current.rotation.y) * 0.05;
 
     group.current.rotation.x +=
-      (-state.pointer.y * 0.08 -
-        group.current.rotation.x) *
-      0.05;
+      (rotacaoX - group.current.rotation.x) * 0.05;
   });
 
   return (
     <group
       ref={group}
       rotation={[0, 0, 0]}
-      position={[0, -0.48, 0]}
-      scale={1.75}
+      position={[0, -0.72, 0]}
+      scale={2.2}
     >
       <primitive object={model.scene} />
     </group>
@@ -44,13 +42,12 @@ function Bunny() {
 export default function Avatar3D() {
   return (
     <div className="avatar3d">
-      <div className="avatar-pedestal" />
-
       <Canvas
         camera={{
-          position: [0, 0.2, 6.8],
-          fov: 42,
+          position: [0, 0.1, 7],
+          fov: 45,
         }}
+        dpr={[1, 1.5]}
       >
         <ambientLight intensity={1.5} />
 
@@ -72,27 +69,27 @@ export default function Avatar3D() {
           rotationIntensity={0.15}
           floatIntensity={0.35}
         >
-
-          <mesh
-  position={[0, -2.02, 0]}>
-  <cylinderGeometry args={[1.05, 1.05, 0.14, 64]} />
-
-  <meshStandardMaterial
-    color="#c084fc"
-    emissive="#7c3aed"
-    emissiveIntensity={0.35}
-    metalness={0.2}
-    roughness={0.3}
-  />
-</mesh>
           <Bunny />
         </Float>
+
+        <mesh position={[0, -2.70, 0]}>
+          <cylinderGeometry args={[1, 1, 0.12, 64]} />
+
+          <meshStandardMaterial
+            color="#c084fc"
+            emissive="#7c3aed"
+            emissiveIntensity={0.35}
+            metalness={0.2}
+            roughness={0.3}
+          />
+        </mesh>
 
         <Sparkles
           count={80}
           size={2}
           speed={0.3}
           scale={5}
+          color="#d8b4fe"
         />
 
         <ContactShadows

@@ -296,11 +296,11 @@ color:white;
 .hero-right{
 
 display:flex;
-justify-content:center;
 align-items:center;
 position: relative;
 width:50%;
-
+min-height:550px;
+justify-content:flex-start;
 
 }
 
@@ -342,10 +342,12 @@ font-size:3rem;
 
 .avatar3d{
 height:530px;
-width:530px;
-position:relative;
+width:430px;
+position: relative;
 animation: floatRabbit 5s ease-in-out infinite;
 margin: 0 auto;
+z-index: 5;
+transform:translateX(-55px);
 
 }
 
@@ -1249,10 +1251,10 @@ z-index:-1;
 .calendar-position{
 
 position:absolute;
-
-bottom:-40px;
-
-left:-50px;
+top:50%;
+right: -50px;
+transform: translateY(-50%);
+z-index:10;
 
 }
 
@@ -1306,23 +1308,17 @@ font-size:3.8rem;
 
 @keyframes floatRabbit{
 
-0%{
-
-transform:translateY(0px);
-
+0% {
+  transform: translateX(-55px) translateY(0);
+}
+50% {
+  transform:translateX(-55px) translateY(-18px);
 }
 
-50%{
-
-transform:translateY(-18px);
-
+100% {
+  transform:translateX(-55px) translateY(0);
 }
-
-100%{
-
-transform:translateY(0px);
-
-}}
+}
 
 .container {
   width: min(1200px, 90%);
@@ -1333,25 +1329,3 @@ transform:translateY(0px);
   position: relative;
   z-index: 2;
 }
-
-.avatar-pedestal {
-  position: absolute;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(
-    180deg,
-    #e9d5ff,
-    #c084fc,
-    #7c3aed
-  );
-  box-shadow:
-    0 0 30px rgba(168, 85, 247, 0.6),
-    0 15px 25px rgba(0, 0, 0, 0.35);
-  z-index: 1;
-  pointer-events: none;
-}
-
