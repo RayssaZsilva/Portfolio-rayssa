@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="hero-buttons">
 
           <a
-            href="#projects"
+            href="https://github.com/repos?q=owner%3A%40me"
             className="primary"
           >
             Ver Projetos
@@ -54,11 +54,11 @@ export default function Hero() {
 
         <div className="hero-social">
 
-          <a href="#">
+          <a href="https://github.com/RayssaZsilva">
             <FaGithub />
           </a>
 
-          <a href="#">
+          <a href="https://www.linkedin.com/in/rayssa-silva-034665208?utm_source=share_via&utm_content=profile&utm_medium=member_ios">
             <FaLinkedin />
           </a>
 

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { name: "Início", id: "home" },
-  { name: "Sobre", id: "about" },
-  { name: "Tecnologias", id: "skills" },
-  { name: "Projetos", id: "projects" },
-  { name: "Contato", id: "contact" },
+  { name: "Home", id: "home" },
+  { name: "Sobre", id: "sobre" },
+  { name: "Tecnologias", id: "habilidades" },
+  { name: "projetos", id: "projetos" },
+  { name: "Contato", id: "contato" },
 ];
 
 export default function Navbar() {
