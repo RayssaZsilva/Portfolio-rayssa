@@ -31,7 +31,7 @@ function Bunny() {
     <group
       ref={group}
       rotation={[0, 0, 0]}
-      position={[-0.28, -0.35, 0]}
+      position={[-0.28, 0.7, 0]}
       scale={2.4}
     >
       <primitive object={model.scene} />
@@ -72,7 +72,7 @@ export default function Avatar3D() {
           <Bunny />
         </Float>
 
-        <mesh position={[-0.28, -2.65, 0]}>
+        <mesh position={[-0.28, -1.60, 0]}>
           <cylinderGeometry args={[1, 1, 0.12, 64]} />
 
           <meshStandardMaterial
@@ -93,10 +93,10 @@ export default function Avatar3D() {
         />
 
         <ContactShadows
-          position={[0, -2.95, 0]}
+          position={[0, -2.10, 0]}
           blur={2.5}
           opacity={0.45}
-          scale={5}
+          scale={4}
         />
       </Canvas>
     </div>
