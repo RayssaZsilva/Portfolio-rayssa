@@ -299,8 +299,21 @@ display:flex;
 align-items:center;
 position: relative;
 width:50%;
-min-height:550px;
+min-height:650px;
 justify-content:flex-start;
+overflow:visible;
+
+}
+
+.avatar3d{
+width:500px;
+height:680px;
+position: relative;
+margin: 0 auto;
+left: -155px;
+z-index: 5;
+overflow:visible;
+animation: floatRabbit 5s ease-in-out infinite;
 
 }
 
@@ -339,18 +352,11 @@ font-size:3rem;
   font-size: 13px;
   white-space: nowrap;
 }
-
-.avatar3d{
-height:530px;
-width:430px;
-position: relative;
-animation: floatRabbit 5s ease-in-out infinite;
-margin: 0 auto;
-z-index: 5;
-transform:translateX(-55px);
-
+.avatar3d {
+  width: 350px;
+  height: 350px;
+  left:0;
 }
-
 }
 
 .about{
@@ -1309,14 +1315,14 @@ font-size:3.8rem;
 @keyframes floatRabbit{
 
 0% {
-  transform: translateX(-55px) translateY(0);
+  transform:  translateY(0);
 }
 50% {
-  transform:translateX(-55px) translateY(-18px);
+  transform:  translateY(-18px);
 }
 
 100% {
-  transform:translateX(-55px) translateY(0);
+  transform: translateY(0);
 }
 }
 
@@ -1328,4 +1334,5 @@ font-size:3.8rem;
 .avatar3d canvas {
   position: relative;
   z-index: 2;
+  overflow:visible;
 }

@@ -31,8 +31,8 @@ function Bunny() {
     <group
       ref={group}
       rotation={[0, 0, 0]}
-      position={[0, -0.72, 0]}
-      scale={2.2}
+      position={[-0.28, -0.35, 0]}
+      scale={2.4}
     >
       <primitive object={model.scene} />
     </group>
@@ -44,8 +44,8 @@ export default function Avatar3D() {
     <div className="avatar3d">
       <Canvas
         camera={{
-          position: [0, 0.1, 7],
-          fov: 45,
+          position: [0, 0.35, 8,8],
+          fov: 48,
         }}
         dpr={[1, 1.5]}
       >
@@ -72,7 +72,7 @@ export default function Avatar3D() {
           <Bunny />
         </Float>
 
-        <mesh position={[0, -2.70, 0]}>
+        <mesh position={[-0.28, -2.65, 0]}>
           <cylinderGeometry args={[1, 1, 0.12, 64]} />
 
           <meshStandardMaterial
@@ -93,7 +93,7 @@ export default function Avatar3D() {
         />
 
         <ContactShadows
-          position={[0, -2.12, 0]}
+          position={[0, -2.95, 0]}
           blur={2.5}
           opacity={0.45}
           scale={5}

@@ -15,7 +15,7 @@ export default function Hero() {
       >
 
         <span className="hero-badge">
-          👋 Olá, eu sou
+          Olá, eu sou
         </span>
 
         <h1>
