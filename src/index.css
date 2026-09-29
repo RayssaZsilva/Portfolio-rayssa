@@ -1338,168 +1338,589 @@ font-size:3.8rem;
 }
 
 /* Ajustes apenas para tablet e celular */
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET E CELULAR
+   Mantém o desktop original
+========================================================= */
+
 @media (max-width: 950px) {
+
+  /* ---------- BASE ---------- */
+
   .container {
-    width: calc(100% - 24px);
+    width: calc(100% - 32px);
+    max-width: 100%;
+    margin-inline: auto;
   }
 
-  .hero {
-    /* Cancela o flex-direction: column antigo */
-    flex-direction: row;
+  .section-title {
+    font-size: clamp(2rem, 7vw, 2.7rem);
+  }
 
-    width: 97%;
-    min-height: 75svh;
-    padding-top: 90px;
-    padding-bottom: 10px;
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+
+  .hero {
+    width: 100%;
+    min-height: 100svh;
+
+    padding-top: 100px;
+    padding-bottom: 40px;
+
+    display: flex;
+    flex-direction: column;
 
     align-items: center;
-    justify-content: space-between;
-    gap: clamp(5px, 2vw, 16px);
+    justify-content: center;
 
-    text-align: left;
+    gap: 30px;
+
+    text-align: center;
+
     overflow: visible;
   }
 
-  /* Área do texto */
+
+  /* ---------- TEXTO ---------- */
+
   .hero-left {
-    width: 60%;
-    max-width: none;
+    width: 100%;
+    max-width: 680px;
     min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-badge {
-    padding: 7px 12px;
-    margin-bottom: 14px;
-    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
-    white-space: nowrap;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+
+    font-size: clamp(0.72rem, 2.5vw, 0.9rem);
+
+    white-space: normal;
+    text-align: center;
   }
 
   .hero-left h1 {
-    font-size: clamp(2rem, 9vw, 3.8rem);
-    line-height: 0.95;
-    margin-bottom: 10px;
+    font-size: clamp(2.7rem, 12vw, 4rem);
+    line-height: 1;
+
+    margin-bottom: 12px;
+
+    overflow-wrap: anywhere;
   }
 
   .hero-left h2 {
-    font-size: clamp(0.85rem, 3.5vw, 1.4rem);
-    line-height: 1.2;
-    margin: 0 0 14px;
+    font-size: clamp(1.15rem, 5vw, 1.7rem);
+    line-height: 1.25;
+
+    margin: 0 0 16px;
   }
 
   .hero-left p {
     width: 100%;
-    margin: 0 0 18px;
+    max-width: 600px;
 
-    font-size: clamp(0.65rem, 2.6vw, 0.95rem);
-    line-height: 1.45;
+    margin: 0 0 22px;
+
+    font-size: clamp(0.9rem, 3.7vw, 1.05rem);
+    line-height: 1.6;
   }
+
+
+  /* ---------- BOTÕES ---------- */
 
   .hero-buttons {
     width: 100%;
-    margin-bottom: 18px;
 
-    justify-content: flex-start;
-    gap: clamp(5px, 1.5vw, 10px);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
   }
 
   .primary,
   .secondary {
-    min-width: 0;
+    min-width: 135px;
 
-    padding:
-      clamp(7px, 2vw, 11px)
-      clamp(7px, 2.5vw, 16px);
+    padding: 11px 18px;
 
-    font-size: clamp(0.55rem, 2.1vw, 0.8rem);
-    white-space: nowrap;
+    font-size: clamp(0.8rem, 3.4vw, 0.95rem);
   }
 
+
+  /* ---------- REDES SOCIAIS ---------- */
+
   .hero-social {
-    justify-content: flex-start;
-    gap: 10px;
-    margin-top: 16px;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 18px;
   }
 
   .hero-social a {
-    width: clamp(20px, 8vw, 20px);
-    height: clamp(34px, 9vw, 43px);
-    font-size: clamp(15px, 4vw, 20px);
+    width: 42px;
+    height: 42px;
+
+    font-size: 19px;
   }
 
-  /* Área do coelho e calendário */
+
+  /* =========================================================
+     COELHO + CALENDÁRIO
+  ========================================================= */
+
   .hero-right {
     width: 100%;
-    min-width: 0;
-    min-height: clamp(290px, 100vw, 520px);
+    max-width: 700px;
+
+    min-height: auto;
 
     display: grid;
+
     grid-template-columns:
-      minmax(0, 1.1fr)
-      minmax(0, 0.9fr);
+      minmax(0, 1.15fr)
+      minmax(130px, 0.85fr);
 
     align-items: center;
     justify-content: center;
-    gap: clamp(3px, 1vw, 10px);
+
+    gap: clamp(8px, 3vw, 24px);
 
     position: relative;
+
     overflow: visible;
   }
 
-  /* Coelho */
+
+  /* ---------- COELHO ---------- */
+
   .avatar3d {
     width: 100%;
-    max-width: none;
-    height: clamp(100px, 450vw, 300px);
+
+    max-width: 360px;
+
+    height: clamp(260px, 70vw, 390px);
 
     position: relative;
+
     left: auto;
     right: auto;
 
-    margin: 0;
+    margin: 0 auto;
+
     overflow: visible;
   }
 
-  /* Posição do calendário */
+  .avatar3d canvas {
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: 100%;
+  }
+
+
+  /* ---------- CALENDÁRIO ---------- */
+
   .calendar-position {
     width: 100%;
-    min-width: 0;
 
     position: relative;
+
     top: auto;
     right: auto;
     bottom: auto;
     left: auto;
 
     transform: none;
+
     margin: 0;
   }
 
   .calendar-card {
-    width: 95%;
-    max-width: 210px;
+    width: 100%;
+
+    max-width: 230px;
     min-width: 0;
 
-    padding: clamp(10px, 18vw, 18px);
-    border-radius: clamp(14px, 4vw, 22px);
-    gap: clamp(6px, 2vw, 10px);
+    padding: clamp(12px, 3.5vw, 20px);
+
+    border-radius: clamp(16px, 4vw, 24px);
+
+    gap: 8px;
   }
 
   .calendar-card-header {
-    gap: 0.3px;
+    gap: 6px;
+
+    flex-wrap: wrap;
   }
 
   .calendar-card-header span {
-    font-size: clamp(0.50rem, 6vw, 1.1rem);
+    font-size: clamp(0.9rem, 4vw, 1.4rem);
   }
 
   .calendar-card-date {
-    font-size: clamp(0.75rem, 0.30vw, 0.20rem);
-    line-height: 1.0;
+    font-size: clamp(0.8rem, 3.2vw, 1.05rem);
+
+    line-height: 1.25;
+
     overflow-wrap: anywhere;
   }
 
   .calendar-card-time {
-    font-size: clamp(0.6rem, 5vw, 2.9rem);
+    font-size: clamp(1.25rem, 6vw, 2.1rem);
+  }
+
+
+  /* =========================================================
+     SOBRE
+  ========================================================= */
+
+  .about {
+    padding: 80px 0;
+  }
+
+  .about-card {
+    width: 100%;
+
+    padding: clamp(24px, 6vw, 40px);
+
+    border-radius: 24px;
+  }
+
+  .about-card h2 {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+  .about-card p {
+    font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+  }
+
+
+  /* =========================================================
+     HABILIDADES
+  ========================================================= */
+
+  .skills {
+    padding: 80px 0;
+  }
+
+  .skills-card {
+    width: 100%;
+
+    padding: clamp(22px, 6vw, 35px);
+
+    border-radius: 24px;
+  }
+
+  .skills h2 {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+
+  /* =========================================================
+     PROJETOS
+  ========================================================= */
+
+  .projects {
+    padding: 80px 0;
+  }
+
+  .projects h2 {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+  .projects-grid {
+    width: 100%;
+
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(min(100%, 280px), 1fr)
+      );
+
+    gap: 24px;
+
+    margin-top: 35px;
+  }
+
+  .project-card {
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 20px;
+
+    border-radius: 24px;
+  }
+
+  .project-card h3 {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+
+  .project-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .techs {
+    gap: 8px;
+  }
+
+  .techs span {
+    padding: 8px 12px;
+
+    font-size: 0.85rem;
+  }
+
+
+  /* =========================================================
+     REDES SOCIAIS
+  ========================================================= */
+
+  .socials {
+    padding: 80px 0;
+  }
+
+  .socials h2 {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+  .social-grid {
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(min(100%, 180px), 1fr)
+      );
+
+    gap: 18px;
+
+    margin-top: 35px;
+  }
+
+  .social-grid a {
+    width: 100%;
+
+    padding: 24px 16px;
+  }
+
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+
+  .footer {
+    padding: 60px 20px;
+  }
+
+  .footer h3 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+
+  /* Cursor personalizado não é necessário no touch */
+
+  .cursor {
+    display: none;
   }
 }
 
+
+/* =========================================================
+   CELULARES
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: calc(100% - 24px);
+  }
+
+
+  /* ---------- NAVBAR ---------- */
+
+  .navbar,
+  .navbar-content {
+    height: 70px;
+  }
+
+  .logo h2 {
+    font-size: 18px;
+  }
+
+  .logo span {
+    width: 38px;
+    height: 38px;
+
+    font-size: 15px;
+  }
+
+  .menu {
+    top: 70px;
+
+    left: 12px;
+    right: 12px;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    padding-top: 90px;
+    padding-bottom: 30px;
+
+    gap: 24px;
+  }
+
+  .hero-left h1 {
+    font-size: clamp(2.4rem, 13vw, 3.5rem);
+  }
+
+  .hero-left h2 {
+    font-size: clamp(1rem, 5vw, 1.4rem);
+  }
+
+  .hero-left p {
+    font-size: clamp(0.88rem, 4vw, 1rem);
+  }
+
+
+  /* ---------- BOTÕES ---------- */
+
+  .hero-buttons {
+    gap: 10px;
+  }
+
+  .primary,
+  .secondary {
+    flex: 1 1 135px;
+
+    max-width: 200px;
+
+    padding: 10px 14px;
+  }
+
+
+  /* =========================================================
+     COELHO + CALENDÁRIO
+
+     Continuam lado a lado.
+     O tamanho se adapta automaticamente.
+  ========================================================= */
+
+  .hero-right {
+    width: 100%;
+
+    grid-template-columns:
+      minmax(0, 1.1fr)
+      minmax(110px, 0.9fr);
+
+    gap: 6px;
+  }
+
+  .avatar3d {
+    width: 100%;
+
+    height: clamp(220px, 68vw, 310px);
+  }
+
+  .calendar-card {
+    width: 100%;
+
+    max-width: 190px;
+
+    padding: clamp(10px, 3vw, 15px);
+
+    border-radius: 18px;
+  }
+
+  .calendar-card-header span {
+    font-size: clamp(0.8rem, 4vw, 1.1rem);
+  }
+
+  .calendar-card-date {
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
+  }
+
+  .calendar-card-time {
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+  }
+
+
+  /* ---------- CARDS ---------- */
+
+  .about-card,
+  .skills-card {
+    padding: 22px 18px;
+  }
+
+  .project-card {
+    padding: 18px;
+  }
+
+
+  /* ---------- SEÇÕES ---------- */
+
+  .about,
+  .skills,
+  .projects,
+  .socials {
+    padding: 65px 0;
+  }
+}
+
+
+/* =========================================================
+   CELULARES MUITO ESTREITOS
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .container {
+    width: calc(100% - 20px);
+  }
+
+  .hero-left h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .primary,
+  .secondary {
+    width: 100%;
+
+    max-width: 220px;
+
+    flex: none;
+  }
+
+  .hero-right {
+    grid-template-columns:
+      minmax(0, 1.05fr)
+      minmax(100px, 0.95fr);
+  }
+
+  .avatar3d {
+    height: 220px;
+  }
+
+  .calendar-card {
+    padding: 9px;
+
+    border-radius: 15px;
+  }
+}
