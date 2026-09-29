@@ -1,5 +1,5 @@
 import "./index.css";
-
+import Chatbot from "./components/Chatbot"
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -21,6 +21,7 @@ function App() {
 
       <main>
         <Hero />
+        <Chatbot></Chatbot>
         <About />
         <Skills />
         <Projects />
