@@ -1,14 +1,16 @@
 import os
+import time
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from google import genai
 from pydantic import BaseModel
-import time
+
 
 # Carrega as variáveis do arquivo .env
 load_dotenv()
+
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -18,11 +20,9 @@ if not GEMINI_API_KEY:
     )
 
 
-# Cliente Gemini
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 
-# Aplicação FastAPI
 app = FastAPI(
     title="Assistente da Rayssa",
     description="Backend do assistente virtual do portfólio.",
@@ -30,7 +30,6 @@ app = FastAPI(
 )
 
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,12 +39,16 @@ app.add_middleware(
 )
 
 
-# Estrutura da mensagem recebida do React
+class HistoryMessage(BaseModel):
+    role: str
+    content: str
+
+
 class ChatRequest(BaseModel):
     message: str
+    history: list[HistoryMessage] = []
 
 
-# Informações que a IA poderá usar sobre a Rayssa
 RAYSSA_CONTEXT = """
 Você é o assistente virtual do portfólio profissional de Rayssa.
 
@@ -144,25 +147,50 @@ def chat(request: ChatRequest):
             detail="A mensagem não pode estar vazia."
         )
 
+    # Mantemos somente as últimas mensagens para não enviar
+    # um histórico enorme para a API.
+    recent_history = request.history[-10:]
+
+    history_text = ""
+
+    for item in recent_history:
+        if item.role == "user":
+            speaker = "Visitante"
+        else:
+            speaker = "Assistente"
+
+        history_text += (
+            f"{speaker}: {item.content}\n"
+        )
+
     try:
         prompt = f"""
 {RAYSSA_CONTEXT}
 
-PERGUNTA DO VISITANTE:
+HISTÓRICO RECENTE DA CONVERSA:
+
+{history_text}
+
+NOVA PERGUNTA DO VISITANTE:
 {user_message}
+
+Considere o histórico quando ele for relevante para entender
+a nova pergunta.
 
 Responda ao visitante em português brasileiro.
 """
 
         response = None
 
-        # Tenta até 3 vezes caso o Gemini esteja temporariamente sobrecarregado
+        # Tenta novamente se o Gemini estiver
+        # temporariamente indisponível.
         for tentativa in range(3):
             try:
                 response = client.models.generate_content(
                     model="gemini-3.5-flash-lite",
                     contents=prompt,
                 )
+
                 break
 
             except Exception as error:
@@ -171,7 +199,9 @@ Responda ao visitante em português brasileiro.
                         f"Gemini ocupado. "
                         f"Tentativa {tentativa + 1}/3..."
                     )
+
                     time.sleep(2)
+
                 else:
                     raise
 

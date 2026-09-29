@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import "./Chatbot.css";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const messagesEndRef = useRef(null);
 
   const [messages, setMessages] = useState([
     {
@@ -11,13 +15,26 @@ export default function Chatbot() {
     },
   ]);
 
+  // Rola automaticamente para a mensagem mais recente
+  useEffect(() => {
+    if (isOpen) {
+      messagesEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [messages, isLoading, isOpen]);
+
   const sendMessage = async () => {
-    // Não envia mensagem vazia
-    if (!message.trim()) return;
+    const userMessage = message.trim();
 
-    const userMessage = message;
+    // Impede mensagem vazia ou vários envios ao mesmo tempo
+    if (!userMessage || isLoading) return;
 
-    // Adiciona a mensagem do usuário ao chat
+    const history = messages.map((msg) => ({
+      role: msg.sender === "user" ? "user" : "assistant",
+      content: msg.text,
+    }));
+
     setMessages((prev) => [
       ...prev,
       {
@@ -26,29 +43,30 @@ export default function Chatbot() {
       },
     ]);
 
-    // Limpa o campo de texto
     setMessage("");
+    setIsLoading(true);
 
     try {
-      // Envia a mensagem para o backend Python
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           message: userMessage,
+          history: history,
         }),
       });
 
-      // Verifica se ocorreu algum erro no backend
       if (!response.ok) {
-        throw new Error(`Erro HTTP: ${response.status}`);
+        throw new Error(
+          `Erro HTTP: ${response.status}`
+        );
       }
 
       const data = await response.json();
 
-      // Adiciona a resposta do backend ao chat
       setMessages((prev) => [
         ...prev,
         {
@@ -57,7 +75,10 @@ export default function Chatbot() {
         },
       ]);
     } catch (error) {
-      console.error("Erro ao enviar mensagem:", error);
+      console.error(
+        "Erro ao enviar mensagem:",
+        error
+      );
 
       setMessages((prev) => [
         ...prev,
@@ -66,95 +87,117 @@ export default function Chatbot() {
           text: "Ops! Não consegui responder agora. Tente novamente.",
         },
       ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {/* Botão flutuante do chatbot */}
       {!isOpen && (
         <button
+          className="chatbot-button"
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-purple-600 text-2xl shadow-lg transition hover:scale-110"
-          aria-label="Abrir assistente"
+          aria-label="Abrir chat"
         >
-          🪼
+          <span className="chatbot-button-text">
+            Chat rAI
+          </span>
+
+          <span className="chatbot-button-icon">
+            🪼
+          </span>
         </button>
       )}
 
-      {/* Janela do chatbot */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 flex h-[500px] w-[350px] flex-col overflow-hidden rounded-2xl border border-purple-400/20 bg-[#12091f] shadow-2xl">
+        <div className="chatbot-window">
+          <div className="chatbot-header">
+            <div className="chatbot-title">
+              <span className="chatbot-icon">
+                🪼
+              </span>
 
-          {/* Cabeçalho */}
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
-            <div>
-              <h2 className="font-semibold text-white">
-                Assistente da Rayssa
-              </h2>
+              <div>
+                <h2>Assistente da Rayssa</h2>
 
-              <p className="text-xs text-purple-300">
-                Posso falar sobre meu portfólio
-              </p>
+                <p>
+                  Online • Pergunte sobre meu portfólio
+                </p>
+              </div>
             </div>
 
-            {/* Botão fechar */}
             <button
+              className="chatbot-close"
               onClick={() => setIsOpen(false)}
-              className="text-xl text-gray-400 transition hover:text-white"
               aria-label="Fechar assistente"
             >
               ×
             </button>
           </div>
 
-          {/* Área das mensagens */}
-          <div className="flex-1 space-y-3 overflow-y-auto p-4">
+          <div className="chatbot-messages">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  msg.sender === "user"
-                    ? "justify-end"
-                    : "justify-start"
-                }`}
+                className={`chatbot-message-row ${msg.sender}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
-                    msg.sender === "user"
-                      ? "rounded-br-none bg-purple-600 text-white"
-                      : "rounded-tl-none bg-purple-600/20 text-gray-200"
-                  }`}
+                  className={`chatbot-message ${msg.sender}`}
                 >
                   {msg.text}
                 </div>
               </div>
             ))}
+
+            {isLoading && (
+              <div className="chatbot-message-row bot">
+                <div className="chatbot-typing">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                  <small>
+                    rAI está digitando...
+                  </small>
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
           </div>
 
-          {/* Campo para escrever */}
           <form
+            className="chatbot-form"
             onSubmit={(e) => {
               e.preventDefault();
               sendMessage();
             }}
-            className="flex gap-2 border-t border-white/10 p-3"
           >
             <input
+              className="chatbot-input"
               type="text"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Digite sua pergunta..."
-              className="min-w-0 flex-1 rounded-xl bg-white/5 px-3 py-3 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-1 focus:ring-purple-500"
+              onChange={(e) =>
+                setMessage(e.target.value)
+              }
+              placeholder={
+                isLoading
+                  ? "Aguarde a resposta..."
+                  : "Pergunte algo sobre a Rayssa..."
+              }
+              disabled={isLoading}
             />
 
-            {/* Botão enviar */}
             <button
+              className="chatbot-send"
               type="submit"
-              className="rounded-xl bg-purple-600 px-4 text-white transition hover:bg-purple-500"
+              disabled={
+                isLoading || !message.trim()
+              }
               aria-label="Enviar mensagem"
             >
-              ➤
+              {isLoading ? "•••" : "➤"}
             </button>
           </form>
         </div>
