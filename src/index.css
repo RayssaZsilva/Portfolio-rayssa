@@ -1695,23 +1695,40 @@ font-size:3.8rem;
     font-size: clamp(2rem, 7vw, 2.5rem);
   }
 
-  .social-grid {
-    grid-template-columns:
-      repeat(
-        auto-fit,
-        minmax(min(100%, 180px), 1fr)
-      );
+ /* Redes sociais no celular: 4 na mesma linha */
 
-    gap: 18px;
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
-    margin-top: 35px;
-  }
+  width: 100%;
+  gap: 10px;
 
-  .social-grid a {
-    width: 100%;
+  margin-top: 35px;
+}
 
-    padding: 24px 16px;
-  }
+.social-grid a {
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px 4px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-grid a img {
+  width: 30px !important;
+  height: 30px;
+  object-fit: contain;
+}
+
+.social-grid a span {
+  display: none;
+}
 
 
   /* =========================================================
