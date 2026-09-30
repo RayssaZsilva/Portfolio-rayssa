@@ -1318,3 +1318,15 @@ canvas {
     font-size: 1.3rem;
   }
 }
+.project-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}

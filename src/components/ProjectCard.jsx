@@ -6,6 +6,7 @@ import {
 
 export default function ProjectCard({
   titulo,
+  logo,
   descricao,
   tecnologias,
   linkDemo,
@@ -33,7 +34,17 @@ export default function ProjectCard({
         </span>
       )}
 
-      <h3>{titulo}</h3>
+      <h3 className="project-title">
+        {logo && (
+          <img
+            src={logo}
+            alt={`Logo ${titulo}`}
+            className="project-logo"
+          />
+        )}
+
+        {titulo}
+      </h3>
 
       <p>{descricao}</p>
 
@@ -47,6 +58,7 @@ export default function ProjectCard({
 
       {(linkDemo || linkGithub) && (
         <div className="project-links">
+
           {linkDemo && (
             <a
               href={linkDemo}
@@ -72,6 +84,7 @@ export default function ProjectCard({
               Repositório
             </a>
           )}
+
         </div>
       )}
     </motion.article>

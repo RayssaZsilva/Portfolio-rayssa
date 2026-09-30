@@ -4,7 +4,8 @@ import ProjectCard from "./ProjectCard";
 export default function Projects() {
   const projetos = [
     {
-      titulo: "🏨 Achô",
+      titulo: "Achô",
+      logo: "https://img.icons8.com/?size=100&id=64714&format=png&color=000000",
       descricao:
         "Plataforma de busca de hospedagens com pesquisa por cidade, detalhes dos hotéis, favoritos, login, cadastro, perfil de usuário e persistência de dados com LocalStorage.",
       tecnologias: [
@@ -21,14 +22,16 @@ export default function Projects() {
       destaque: true,
     },
     {
-      titulo: "🎓 TopUm",
+      titulo: "TopUm",
+      logo: "https://img.icons8.com/?size=100&id=109679&format=png&color=000000",
       descricao:
         "Aplicativo para organizar tarefas escolares, acompanhar atividades e gerenciar prazos. Desenvolvido em grupo",
       tecnologias: ["React", "Firebase", "Tailwind"],
       linkGithub: "https://github.com/RayssaZsilva",
     },
     {
-      titulo: "🏪 Izipis",
+      titulo: "Izipis",
+      logo:"https://img.icons8.com/?size=100&id=108565&format=png&color=000000",
       descricao:
         "Sistema PDV para minimercado com gerenciamento de produtos e vendas.",
       tecnologias: ["React", "JavaScript", "SQLite"],
