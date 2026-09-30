@@ -83,8 +83,6 @@ Experiência profissional:
 Projetos:
 - Portfólio pessoal desenvolvido com React.
 - StayFinder: aplicação para pesquisa e comparação de hospedagens.
-- Tech Jobs Analytics: projeto de análise de dados relacionados ao
-  mercado de trabalho em tecnologia.
 - Projetos acadêmicos envolvendo Python, SQL, desenvolvimento web
   e banco de dados.
 

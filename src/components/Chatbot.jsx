@@ -119,7 +119,7 @@ export default function Chatbot() {
               </span>
 
               <div>
-                <h2>Assistente da Rayssa</h2>
+                <h2>Assistente rAI</h2>
 
                 <p>
                   Online • Pergunte sobre meu portfólio
