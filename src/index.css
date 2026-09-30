@@ -250,6 +250,18 @@ canvas {
   color: #c084fc;
   margin-bottom: 20px;
 }
+.hero-focus {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  color: #d8b4fe;
+
+  letter-spacing: 0.5px;
+}
 
 .hero-left p {
   font-size: 18px;
@@ -1023,6 +1035,12 @@ canvas {
 ========================================================= */
 
 @media (max-width: 600px) {
+
+  .hero-focus {
+  margin-bottom: 14px;
+
+  font-size: 0.9rem;
+}
   .container {
     width: calc(100% - 24px);
   }

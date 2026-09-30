@@ -11,7 +11,7 @@ export default function Hero() {
         className="hero-left"
         initial={{ opacity: 0, x: -80 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: .8 }}
+        transition={{ duration: 0.8 }}
       >
 
         <span className="hero-badge">
@@ -25,13 +25,17 @@ export default function Hero() {
         </h1>
 
         <h2>
-          Desenvolvedora Front-end
+          Desenvolvedora de Software em formação
         </h2>
 
+        <span className="hero-focus">
+          Front-end & Backend
+        </span>
+
         <p>
-          Estudante de Ciência da Computação apaixonada por criar
-          interfaces modernas, responsivas e experiências que unem
-          design e tecnologia.
+          Estudante de Ciência da Computação, desenvolvendo aplicações
+          com React, JavaScript, Python, FastAPI, SQL e APIs, com interesse
+          em evoluir também na área de dados.
         </p>
 
         <div className="hero-buttons">
@@ -54,11 +58,21 @@ export default function Hero() {
 
         <div className="hero-social">
 
-          <a href="https://github.com/RayssaZsilva">
+          <a
+            href="https://github.com/RayssaZsilva"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub da Rayssa"
+          >
             <FaGithub />
           </a>
 
-          <a href="https://www.linkedin.com/in/rayssa-silva-034665208?utm_source=share_via&utm_content=profile&utm_medium=member_ios">
+          <a
+            href="https://www.linkedin.com/in/rayssa-silva-034665208?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn da Rayssa"
+          >
             <FaLinkedin />
           </a>
 
@@ -68,9 +82,9 @@ export default function Hero() {
 
       <motion.div
         className="hero-right"
-        initial={{ opacity:0, scale:.8 }}
-        animate={{ opacity:1, scale:1 }}
-        transition={{ duration:1 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
       >
 
         <div className="hero-glow"></div>
@@ -78,7 +92,7 @@ export default function Hero() {
         <Avatar3D />
 
         <div className="calendar-position">
-          <CalendarioCard/>
+          <CalendarioCard />
         </div>
 
       </motion.div>
