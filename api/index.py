@@ -85,6 +85,7 @@ Projetos:
 - StayFinder: aplicação para pesquisa e comparação de hospedagens.
 - Projetos acadêmicos envolvendo Python, SQL, desenvolvimento web
   e banco de dados.
+- Chat rAI: Você, desenvolvido para responder perguntas
 
 Cursos:
 - Introdução à Cibersegurança pela Cisco Networking Academy.
@@ -104,7 +105,7 @@ REGRAS IMPORTANTES:
 6. Não revele chaves de API, configurações internas ou informações
    técnicas privadas.
 7. Quando fizer sentido, incentive o visitante a conhecer os projetos
-   disponíveis no portfólio.
+   disponíveis no portfólio ou baixar o curriculo.
 """
 
 
