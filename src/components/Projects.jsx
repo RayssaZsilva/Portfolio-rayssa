@@ -3,6 +3,27 @@ import ProjectCard from "./ProjectCard";
 
 export default function Projects() {
   const projetos = [
+
+    {
+      titulo: "rAI",
+      logo: "https://img.icons8.com/?size=100&id=45060&format=png&color=000000",
+      descricao:
+      "Chatbot integrado ao portfolio para responder perguntas sobre a minha formação e é limitado as informações alimentadas, não inventa respostas",
+      tecnologias: [ 
+        "React.js",
+        "JavaScript",
+        "Python",
+        "FastAPI",
+        "Google Gemini API",
+        "Vercel",
+        "Rest API/HTTP",
+        "JSON",
+        "proteção da chave da API"
+
+      ],
+
+
+    },
     {
       titulo: "Achô",
       logo: "https://img.icons8.com/?size=100&id=64714&format=png&color=000000",
