@@ -21,10 +21,17 @@ export default function About() {
       >
 
           <span className="badge">
-             
-             <img src="https://img.icons8.com/?size=100&id=yr3MRiBOY9BN&format=png&color=000000" 
-             style={{width: '100px'}}
-              />
+      <img
+    src="/preview/perfil.jpeg"
+    alt="Foto de Rayssa"
+    style={{
+      width: "150px",
+      height: "150px",
+      borderRadius: "50%",
+      objectFit: "cover",
+      objectPosition: "center",
+     }}
+       />
 
             <h1>Sobre mim</h1>
 
