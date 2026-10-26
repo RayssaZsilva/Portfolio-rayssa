@@ -25,11 +25,13 @@ export default function About() {
     src="/preview/perfil.jpeg"
     alt="Foto de Rayssa"
     style={{
-      width: "150px",
-      height: "150px",
-      borderRadius: "50%",
+      width: "130px",
+      height: "180px",
+      borderRadius: "70%",
       objectFit: "cover",
-      objectPosition: "center",
+      objectPosition: "center 70%",
+      display:"block",
+      margin:"0 auto",
      }}
        />
 
