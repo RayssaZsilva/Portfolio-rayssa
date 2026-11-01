@@ -12,7 +12,7 @@ export default function Footer() {
 
       <p>
 
-        Desenvolvedora em formação
+        Desenvolvedora de Software em formação
 
       </p>
 

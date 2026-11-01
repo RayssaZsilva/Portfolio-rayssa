@@ -29,13 +29,11 @@ export default function Hero() {
         </h2>
 
         <span className="hero-focus">
-          Front-end & Backend
+          Front-end | Back-end | Inteligência Artificial
         </span>
 
         <p>
-          Estudante de Ciência da Computação, desenvolvendo aplicações
-          com React, JavaScript, Python, FastAPI, SQL e APIs, com interesse
-          em evoluir também na área de dados.
+         Estudante de Ciência da Computação, com experiência prática no desenvolvimento de aplicações utilizando React, JavaScript, Python, FastAPI, SQL e integração de APIs. Tenho interesse em inteligência artificial, automação de processos e soluções orientadas a dados.
         </p>
 
         <div className="hero-buttons">
@@ -48,7 +46,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="/curriculo.pdf"
+            href="/Curriculo_Rayssa_Cardoso_Portfolio.pdf"
             className="secondary"
           >
             Download CV

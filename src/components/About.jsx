@@ -51,17 +51,20 @@ export default function About() {
 
         </p>
 
-        <p>
+        
+    <p>
+  Tenho interesse em desenvolvimento de software,
+  inteligência artificial, automação de processos
+  e integração de sistemas.
+    </p>
 
-          Tenho interesse em desenvolvimento web, UI/UX, banco de dados e cibersegurança.
+    <p>
+  Meu objetivo é desenvolver soluções inteligentes
+  e inovadoras que resolvam problemas reais,
+  otimizem tarefas e conectem tecnologia
+  às necessidades das pessoas.
+    </p>
 
-        </p>
-
-        <p>
-
-          Meu objetivo é construir soluções criativas que unam tecnologia, design e experiência do usuário.
-
-        </p>
 
       </motion.div>
 
