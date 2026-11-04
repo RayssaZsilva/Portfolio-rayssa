@@ -21,7 +21,7 @@ from github_service import get_github_projects
 # CONFIGURAÇÕES
 # ==========================================
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("rai")
