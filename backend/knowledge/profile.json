@@ -1,0 +1,35 @@
+
+{
+  "nome": "Rayssa Silva",
+  "profissao": "Desenvolvedora em formação",
+  "localizacao": "Guarulhos, São Paulo, Brasil",
+  "resumo": "Estudante de Ciência da Computação com experiência em suporte de TI e desenvolvimento de projetos próprios. Possui conhecimentos em desenvolvimento web, integração de APIs, automação e inteligência artificial aplicada.",
+  "formacao": [
+    {
+      "curso": "Bacharelado em Ciência da Computação",
+      "instituicao": "Universidade Guarulhos (UNG)",
+      "semestre": "6º semestre",
+      "previsao_conclusao": "2028",
+      "situacao": "Em andamento"
+    },
+    {
+      "curso": "Técnico em Agropecuária",
+      "instituicao": "Instituto Federal do Amazonas (IFAM)",
+      "situacao": "Concluído"
+    }
+  ],
+  "interesses_profissionais": [
+    "Desenvolvimento de software",
+    "Desenvolvimento web",
+    "Desenvolvimento full-stack",
+    "Inteligência artificial aplicada",
+    "Automação de processos",
+    "Integração de APIs",
+    "Análise de dados"
+  ],
+  "objetivo_profissional": "Atuar na área de tecnologia, contribuindo para o desenvolvimento de soluções digitais e ampliando conhecimentos em programação, automação e inteligência artificial.",
+  "links": {
+    "portfolio": "https://portfolio-rayssa.vercel.app/",
+    "linkedin": "https://www.linkedin.com/in/rayssa-silva-034665208"
+  }
+}
