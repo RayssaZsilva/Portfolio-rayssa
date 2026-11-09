@@ -1,3 +1,5 @@
+> Atualização: o cabeçalho agora contém somente o título. Descrição e controles visíveis foram removidos. O botão de pausar/retomar aparece apenas ao receber foco e está disponível para leitores de tela. Setas de teclado continuam na faixa; gestos e foco de teclado pausam temporariamente, sem manter pausa após interação por mouse/toque. A espera de 1,4s é renovada durante a inércia do swipe. As referências a controles visíveis abaixo registram a implementação anterior.
+
 # Carrossel de projetos
 
 A seção Meus Projetos usa rolagem horizontal nativa com três conjuntos visuais. O conjunto central é o único exposto a leitores de tela e à navegação por Tab; cópias têm `aria-hidden` e links com `tabIndex=-1`, preservando clique e swipe. Não há novos pacotes.

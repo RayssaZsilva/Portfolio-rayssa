@@ -28,7 +28,8 @@ with sync_playwright() as p:
         assert page.locator('.carousel-group[aria-hidden] a:not([tabindex="-1"])').count() == 0
         assert page.get_by_role('heading', name='Achô').count() == 1
         before = carousel.evaluate('(e)=>e.scrollLeft')
-        page.get_by_role('button',name='Próximo projeto',exact=True).click()
+        carousel.focus()
+        page.keyboard.press('ArrowRight')
         page.wait_for_timeout(100)
         after = carousel.evaluate('(e)=>e.scrollLeft')
         assert abs(after-before)>10
@@ -48,7 +49,7 @@ with sync_playwright() as p:
     assert abs(carousel.evaluate('(e)=>e.scrollLeft')-start)>100
     # Autoplay and hover pause (move focus away from the scrolling viewport).
     page.emulate_media(reduced_motion='no-preference')
-    page.get_by_role('button',name='Retomar movimento',exact=True).click()
+    carousel.evaluate('(e)=>e.blur()')
     page.mouse.move(0,0)
     page.wait_for_timeout(1700)
     start=carousel.evaluate('(e)=>e.scrollLeft');page.wait_for_timeout(600)
@@ -56,7 +57,8 @@ with sync_playwright() as p:
     box=carousel.bounding_box();page.mouse.move(box['x']+50,box['y']+80)
     page.wait_for_timeout(100);start=carousel.evaluate('(e)=>e.scrollLeft');page.wait_for_timeout(350)
     assert abs(carousel.evaluate('(e)=>e.scrollLeft')-start)<2
-    page.get_by_role('button',name='Pausar movimento',exact=True).click();page.mouse.move(0,0)
+    page.locator('.carousel-pause-accessible').focus()
+    page.keyboard.press('Enter');page.mouse.move(0,0)
     start=carousel.evaluate('(e)=>e.scrollLeft');page.wait_for_timeout(350)
     assert abs(carousel.evaluate('(e)=>e.scrollLeft')-start)<2
     page.emulate_media(reduced_motion='reduce')

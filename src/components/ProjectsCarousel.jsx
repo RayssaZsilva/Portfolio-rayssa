@@ -44,7 +44,7 @@ export default function ProjectsCarousel({ projects }) {
     };
     const onScroll = () => {
       normalize();
-      if (interaction.current.pointer) interaction.current.until = performance.now() + 1400;
+      if (interaction.current.pointer || performance.now() < interaction.current.until) interaction.current.until = performance.now() + 1400;
     };
     const tick = (time) => {
       const state = interaction.current;
@@ -89,7 +89,7 @@ export default function ProjectsCarousel({ projects }) {
   }, []);
 
   const move = (direction) => {
-    setPaused(true);
+    interaction.current.until = performance.now() + 1400;
     const step = cycle.current / projects.length;
     viewport.current.scrollLeft += direction * step;
   };
@@ -97,22 +97,17 @@ export default function ProjectsCarousel({ projects }) {
   return (
     <div className="projects-carousel" role="region" aria-roledescription="carrossel" aria-label="Projetos da Rayssa">
       <header className="carousel-toolbar container">
-        <div className="carousel-heading">
-          <h2 id="projects-title">Meus Projetos</h2>
-          <p id="projects-carousel-help">Arraste para explorar os projetos.</p>
-        </div>
-        <div className="carousel-controls">
-          <button type="button" onClick={() => move(-1)} aria-label="Projeto anterior" aria-controls="projects-viewport">←</button>
-          <button type="button" onClick={() => setPaused((value) => !value)} disabled={!!reducedMotion} aria-controls="projects-viewport">
-            {reducedMotion ? "Movimento reduzido" : paused ? "Retomar movimento" : "Pausar movimento"}
-          </button>
-          <button type="button" onClick={() => move(1)} aria-label="Próximo projeto" aria-controls="projects-viewport">→</button>
-        </div>
+        <h2 id="projects-title">Meus Projetos</h2>
       </header>
-      <div id="projects-viewport" className="carousel-viewport" ref={viewport} tabIndex={0} aria-describedby="projects-carousel-help"
+      <button className="carousel-pause-accessible" type="button"
+        onClick={() => setPaused((value) => !value)} disabled={reducedMotion}
+        aria-controls="projects-viewport" aria-pressed={paused}>
+        {reducedMotion ? "Movimento reduzido" : paused ? "Retomar movimento dos projetos" : "Pausar movimento dos projetos"}
+      </button>
+      <div id="projects-viewport" className="carousel-viewport" ref={viewport} tabIndex={0} aria-labelledby="projects-title"
         onMouseEnter={() => { interaction.current.hover = true; }}
         onMouseLeave={() => { interaction.current.hover = false; }}
-        onFocusCapture={() => { interaction.current.focus = true; }}
+        onFocusCapture={(event) => { interaction.current.focus = event.target.matches(":focus-visible"); }}
         onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) interaction.current.focus = false; }}
         onKeyDown={(event) => {
           if (event.target === event.currentTarget && ["ArrowLeft", "ArrowRight"].includes(event.key)) {
@@ -122,6 +117,7 @@ export default function ProjectsCarousel({ projects }) {
         onPointerDown={(event) => {
           if (event.button !== 0) return;
           interaction.current.pointer = true;
+          interaction.current.focus = false;
           suppressClick.current = false;
           drag.current = { x: event.clientX, start: event.currentTarget.scrollLeft, type: event.pointerType, moved: false };
         }}
