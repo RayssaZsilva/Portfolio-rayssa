@@ -1243,7 +1243,7 @@ canvas {
     padding: 18px;
   }
 
-  /* 4 redes na mesma linha */
+  /* Redes sociais em telas pequenas */
   .social-grid {
     width: 100%;
     max-width: 340px;
@@ -1360,8 +1360,9 @@ section[id] { scroll-margin-top: 100px; }
   .hero-right { margin-top: 0; align-items: center; }
   .avatar3d { animation: none; }
   .techs span { max-width: 100%; overflow-wrap: anywhere; }
-  .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .social-grid a { min-height: 96px; gap: 8px; }
+  .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .social-grid a { min-height: 60px; padding: 8px; flex-direction: row; gap: 8px; }
+  .social-grid a img { width: 20px; height: 20px; }
   .social-grid a span { display: inline; font-size: 0.95rem; }
   .footer { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
 }
