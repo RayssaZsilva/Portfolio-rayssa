@@ -12,6 +12,24 @@ with sync_playwright() as p:
  page.route('**/api/chat',chat)
  page.goto(os.getenv('BASE_URL', 'http://localhost:5174'));page.wait_for_timeout(2000)
  page.get_by_role('button',name='Abrir chat',exact=True).click()
+ for width in [320,375,390,430,768,1440,1920]:
+  page.set_viewport_size({'width':width,'height':844})
+  page.wait_for_timeout(100)
+  r=page.locator('.chatbot-window').bounding_box()
+  assert r['x']>=0 and r['y']>=0 and r['x']+r['width']<=width and r['y']+r['height']<=844
+  if width<=600:
+   assert abs(r['width']/width-0.94)<0.01 and r['height']>=700
+  else:
+   assert 420<=r['width']<=480 and r['height']==620
+  assert page.evaluate('document.documentElement.scrollWidth === innerWidth')
+  assert page.locator('.chatbot-messages').evaluate('(e)=>e.scrollWidth<=e.clientWidth')
+  page.set_viewport_size({'width':width,'height':350})
+  page.wait_for_timeout(100)
+  for sel in ['.chatbot-window','.chatbot-input','.chatbot-send','.chatbot-close']:
+   r=page.locator(sel).bounding_box()
+   assert r['y']>=0 and r['y']+r['height']<=350,(width,sel,r)
+  print('PASS chat size and short viewport',width,flush=True)
+ page.set_viewport_size({'width':390,'height':844})
  page.evaluate('''() => {
    Object.defineProperty(visualViewport,'height',{configurable:true,value:300});
    Object.defineProperty(visualViewport,'offsetTop',{configurable:true,value:120});

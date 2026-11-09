@@ -780,8 +780,15 @@
 
 /* Follow the visual viewport: keyboards can shrink it without resizing the layout viewport. */
 .chatbot-window {
-  bottom: max(16px, env(safe-area-inset-bottom, 0px)) !important;
-  max-height: calc(var(--chat-visible-height, 100dvh) - 32px) !important;
+  --chat-edge: max(24px, env(safe-area-inset-bottom, 0px));
+  --chat-panel-height: min(620px, calc(var(--chat-visible-height, 100dvh) - 48px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)));
+  width: clamp(420px, 32vw, 480px) !important;
+  height: var(--chat-panel-height) !important;
+  top: calc(var(--chat-visible-top, 0px) + var(--chat-visible-height, 100dvh) - var(--chat-panel-height) - var(--chat-edge)) !important;
+  right: max(24px, env(safe-area-inset-right, 0px)) !important;
+  bottom: auto !important;
+  max-width: calc(100vw - 48px) !important;
+  max-height: none !important;
 }
 .rai-clear, .chatbot-close, .chatbot-send { width: 44px; height: 44px; }
 .chatbot-input { height: 44px; font-size: 16px; }
@@ -790,12 +797,11 @@
 .chatbot-button { bottom: max(18px, env(safe-area-inset-bottom, 0px)) !important; }
 @media (max-width: 600px) {
   .chatbot-window {
-    top: calc(var(--chat-visible-top, 0px) + var(--chat-visible-height, 100dvh) - min(560px, var(--chat-visible-height, 100dvh)) + 8px) !important;
-    bottom: auto !important;
-    right: max(8px, env(safe-area-inset-right, 0px)) !important;
-    left: max(8px, env(safe-area-inset-left, 0px)) !important;
+    --chat-edge: max(12px, env(safe-area-inset-bottom, 0px));
+    --chat-panel-height: min(760px, calc(var(--chat-visible-height, 100dvh) - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)));
+    right: max(3vw, env(safe-area-inset-right, 0px)) !important;
+    left: max(3vw, env(safe-area-inset-left, 0px)) !important;
     width: auto !important;
-    height: calc(min(560px, var(--chat-visible-height, 100dvh)) - 16px - env(safe-area-inset-bottom, 0px)) !important;
     max-width: none !important;
     max-height: none !important;
   }
