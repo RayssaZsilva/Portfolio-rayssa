@@ -1,7 +1,9 @@
-.projects-carousel { margin-top: 28px; min-width: 0; }
-.carousel-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.projects-carousel { margin-top: 0; min-width: 0; }
+.carousel-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+.carousel-heading { min-width: 0; }
+.projects .carousel-heading h2 { margin: 0 0 8px; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; }
 .carousel-toolbar p { color: var(--text-secondary); line-height: 1.5; }
-.carousel-controls { display: flex; gap: 8px; }
+.carousel-controls { display: flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 8px; }
 .carousel-controls button { min-width: 44px; min-height: 44px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--secondary); background: var(--surface); color: var(--text); font-size: 0.9rem; }
 .carousel-controls button:disabled { opacity: 0.7; cursor: default; }
 .carousel-viewport { --card-width: min(460px, calc((100cqw - 72px) / 3.2)); --carousel-gap: 24px; overflow-x: auto; overflow-y: hidden; position: relative; container-type: inline-size; scrollbar-width: none; overscroll-behavior-x: contain; overflow-anchor: none; cursor: grab; border-radius: 0; }
@@ -16,9 +18,12 @@
 .carousel-group .project-highlight { min-height: 24px; }
 .carousel-group .project-card:not(.project-card-featured)::before { content: ""; display: block; min-height: 24px; }
 @media (max-width: 1100px) { .carousel-viewport { --card-width: calc((100cqw - 40px) / 2.15); --carousel-gap: 20px; } }
+@media (max-width: 768px) {
+  .carousel-toolbar { flex-direction: column; align-items: stretch; gap: 16px; margin-bottom: 16px; }
+  .carousel-controls { align-self: center; }
+  .carousel-heading p { font-size: 0.95rem; }
+}
 @media (max-width: 600px) {
   .carousel-viewport { --card-width: 88cqw; --carousel-gap: 16px; }
-  .carousel-toolbar { gap: 12px; }
-  .carousel-controls { width: 100%; justify-content: space-between; }
   .carousel-controls button { padding-inline: 10px; }
 }

@@ -96,8 +96,11 @@ export default function ProjectsCarousel({ projects }) {
 
   return (
     <div className="projects-carousel" role="region" aria-roledescription="carrossel" aria-label="Projetos da Rayssa">
-      <div className="carousel-toolbar container">
-        <p id="projects-carousel-help">Arraste para explorar os projetos.</p>
+      <header className="carousel-toolbar container">
+        <div className="carousel-heading">
+          <h2 id="projects-title">Meus Projetos</h2>
+          <p id="projects-carousel-help">Arraste para explorar os projetos.</p>
+        </div>
         <div className="carousel-controls">
           <button type="button" onClick={() => move(-1)} aria-label="Projeto anterior" aria-controls="projects-viewport">←</button>
           <button type="button" onClick={() => setPaused((value) => !value)} disabled={!!reducedMotion} aria-controls="projects-viewport">
@@ -105,7 +108,7 @@ export default function ProjectsCarousel({ projects }) {
           </button>
           <button type="button" onClick={() => move(1)} aria-label="Próximo projeto" aria-controls="projects-viewport">→</button>
         </div>
-      </div>
+      </header>
       <div id="projects-viewport" className="carousel-viewport" ref={viewport} tabIndex={0} aria-describedby="projects-carousel-help"
         onMouseEnter={() => { interaction.current.hover = true; }}
         onMouseLeave={() => { interaction.current.hover = false; }}

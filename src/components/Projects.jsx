@@ -78,8 +78,6 @@ export default function Projects() {
           once: true,
         }}
       >
-        <h2 className="container">Meus Projetos</h2>
-
         <ProjectsCarousel projects={projetos} />
       </motion.div>
     </section>
