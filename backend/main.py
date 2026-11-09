@@ -259,6 +259,8 @@ PRIORIDADE DAS FONTES
    afirmar informações contraditórias como certezas.
    Explique a limitação quando necessário.
 
+6. Se pedirem o curriculo, você manda o que esta em anexo no portfolio.
+
 RECOMENDAÇÕES POR ASSUNTO
 
 Inteligência artificial:
