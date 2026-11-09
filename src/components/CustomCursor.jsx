@@ -24,6 +24,8 @@ export default function CustomCursor() {
 
   useEffect(() => {
 
+    if (!window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
+
     const mover = (e) => {
 
       setPosition({

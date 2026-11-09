@@ -6,7 +6,8 @@ import {
   Sparkles,
   useGLTF,
 } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 function Bunny() {
   const model = useGLTF("/models/cute_rabbit.glb");
@@ -40,14 +41,26 @@ function Bunny() {
 }
 
 export default function Avatar3D() {
+  const reducedMotion = useReducedMotion();
+  const [mobile, setMobile] = useState(() => window.matchMedia("(max-width: 950px)").matches);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 950px)");
+    const resize = () => setMobile(query.matches);
+    query.addEventListener("change", resize);
+    return () => {
+      query.removeEventListener("change", resize);
+    };
+  }, []);
   return (
-    <div className="avatar3d">
+    <div className="avatar3d" role="img" aria-label="Coelho 3D interativo">
       <Canvas
         camera={{
-          position: [0, 0.35, 8,8],
+          position: [0, 0.35, 8],
           fov: 48,
         }}
-        dpr={[1, 1.5]}
+        dpr={mobile ? 1 : [1, 1.5]}
+        frameloop={reducedMotion ? "demand" : "always"}
+        style={{ touchAction: "pan-y" }}
       >
         <ambientLight intensity={1.5} />
 
@@ -65,9 +78,9 @@ export default function Avatar3D() {
         <Environment preset="city" />
 
         <Float
-          speed={2}
-          rotationIntensity={0.15}
-          floatIntensity={0.35}
+          speed={reducedMotion ? 0 : 2}
+          rotationIntensity={reducedMotion ? 0 : 0.15}
+          floatIntensity={reducedMotion ? 0 : 0.35}
         >
           <Bunny />
         </Float>
@@ -85,7 +98,7 @@ export default function Avatar3D() {
         </mesh>
 
         <Sparkles
-          count={80}
+          count={reducedMotion ? 0 : mobile ? 24 : 80}
           size={2}
           speed={0.3}
           scale={5}
@@ -94,6 +107,8 @@ export default function Avatar3D() {
 
         <ContactShadows
           position={[0, -2.10, 0]}
+          frames={mobile || reducedMotion ? 1 : Infinity}
+          resolution={mobile ? 128 : 512}
           blur={2.5}
           opacity={0.45}
           scale={4}

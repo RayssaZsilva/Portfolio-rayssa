@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import Avatar3D from "./Avatar3D";
+import { lazy, Suspense } from "react";
+const Avatar3D = lazy(() => import("./Avatar3D"));
 import CalendarioCard from "./CalendarioCard";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -39,7 +40,7 @@ export default function Hero() {
         <div className="hero-buttons">
 
           <a
-            href="https://github.com/repos?q=owner%3A%40me"
+            href="#projetos"
             className="primary"
           >
             Ver Projetos
@@ -87,7 +88,7 @@ export default function Hero() {
 
         <div className="hero-glow"></div>
 
-        <Avatar3D />
+        <Suspense fallback={<div className="avatar3d" aria-label="Carregando coelho 3D" />}><Avatar3D /></Suspense>
 
         <div className="calendar-position">
           <CalendarioCard />
