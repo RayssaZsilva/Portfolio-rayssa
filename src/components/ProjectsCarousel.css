@@ -1,0 +1,24 @@
+.projects-carousel { margin-top: 28px; min-width: 0; }
+.carousel-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.carousel-toolbar p { color: var(--text-secondary); line-height: 1.5; }
+.carousel-controls { display: flex; gap: 8px; }
+.carousel-controls button { min-width: 44px; min-height: 44px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--secondary); background: var(--surface); color: var(--text); font-size: 0.9rem; }
+.carousel-controls button:disabled { opacity: 0.7; cursor: default; }
+.carousel-viewport { --card-width: calc((100cqw - 72px) / 3.2); --carousel-gap: 24px; overflow-x: auto; overflow-y: hidden; position: relative; container-type: inline-size; scrollbar-width: none; overscroll-behavior-x: contain; overflow-anchor: none; cursor: grab; border-radius: 24px; }
+.carousel-viewport::-webkit-scrollbar { display: none; }
+.carousel-viewport:active { cursor: grabbing; }
+.carousel-track { display: flex; gap: var(--carousel-gap); padding-block: 12px 24px; }
+.carousel-group { display: flex; gap: var(--carousel-gap); flex: 0 0 auto; min-width: 0; }
+.carousel-group .project-card { flex: 0 0 var(--card-width); width: var(--card-width); min-width: 0; user-select: none; }
+.carousel-group .project-card:hover { transform: none; }
+.carousel-group .project-card h3 { font-size: clamp(1.4rem, 2vw, 2rem); }
+.carousel-group .project-links { padding-top: 20px; }
+.carousel-group .project-highlight { min-height: 24px; }
+.carousel-group .project-card:not(.project-card-featured)::before { content: ""; display: block; min-height: 24px; }
+@media (max-width: 1100px) { .carousel-viewport { --card-width: calc((100cqw - 40px) / 2.15); --carousel-gap: 20px; } }
+@media (max-width: 600px) {
+  .carousel-viewport { --card-width: 88cqw; --carousel-gap: 16px; }
+  .carousel-toolbar { gap: 12px; }
+  .carousel-controls { width: 100%; justify-content: space-between; }
+  .carousel-controls button { padding-inline: 10px; }
+}

@@ -20,8 +20,8 @@ with sync_playwright() as p:
   for section in ['#sobre','#habilidades','#projetos','#contato']:
    page.locator(section).scroll_into_view_if_needed();page.wait_for_timeout(900)
   assert page.evaluate('document.documentElement.scrollWidth')==w,(w,'overflow')
-  assert page.locator('.project-card').count()==4
-  for selector in ['.about-card','.skills-card','.project-card','.social-grid a']:
+  assert page.locator('.carousel-group:not([aria-hidden]) .project-card').count()==4
+  for selector in ['.about-card','.skills-card','.carousel-viewport','.social-grid a']:
    for box in page.locator(selector).all():
     r=box.bounding_box();assert r['x']>=0 and r['x']+r['width']<=w+1,(w,selector,r)
   if w<=768:

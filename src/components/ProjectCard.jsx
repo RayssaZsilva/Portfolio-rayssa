@@ -12,13 +12,11 @@ export default function ProjectCard({
   linkDemo,
   linkGithub,
   destaque = false,
+  decorativeCopy = false,
 }) {
   return (
     <motion.article
-      whileHover={{
-        y: -10,
-        scale: 1.02,
-      }}
+
       transition={{
         duration: 0.3,
       }}
@@ -61,6 +59,7 @@ export default function ProjectCard({
 
           {linkDemo && (
             <a
+              tabIndex={decorativeCopy ? -1 : undefined}
               href={linkDemo}
               target="_blank"
               rel="noopener noreferrer"
@@ -74,6 +73,7 @@ export default function ProjectCard({
 
           {linkGithub && (
             <a
+              tabIndex={decorativeCopy ? -1 : undefined}
               href={linkGithub}
               target="_blank"
               rel="noopener noreferrer"
