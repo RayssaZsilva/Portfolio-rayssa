@@ -15,10 +15,12 @@ with sync_playwright() as p:
     carousel = page.locator('.carousel-viewport')
     carousel.scroll_into_view_if_needed()
     page.wait_for_timeout(500)
-    for width in [320,375,390,430,768,1024,1440]:
+    for width in [320,375,390,430,768,1024,1440,1920]:
         page.set_viewport_size({'width':width,'height':844})
         page.wait_for_timeout(150)
         assert page.evaluate('document.documentElement.scrollWidth === innerWidth')
+        bounds = carousel.bounding_box()
+        assert abs(bounds['x']) < 1 and abs(bounds['width'] - width) < 1, bounds
         dims = page.locator('.carousel-group').first.locator('.project-card').evaluate_all('(cards)=>cards.map(c=>({w:c.offsetWidth,h:c.offsetHeight}))')
         assert len({d['w'] for d in dims}) == 1, dims
         assert len({d['h'] for d in dims}) == 1, dims

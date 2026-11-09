@@ -1373,3 +1373,28 @@ section[id] { scroll-margin-top: 100px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .cursor { display: none; }
 }
+
+/* Fluid section shells; readable content keeps its own limits. */
+:root { --page-gutter: clamp(16px, 3vw, 64px); }
+.container, .hero.container { width: calc(100% - 2 * var(--page-gutter)); max-width: none; }
+.background { width: 100%; }
+.about-card p { max-width: 72ch; }
+.projects > div { min-width: 0; }
+@media (min-width: 951px) {
+  .hero { gap: clamp(24px, 3vw, 64px); }
+  .hero-left { flex: 1 1 48%; width: 48%; max-width: 680px; }
+  .hero-right { flex: 1 1 48%; width: auto; max-width: 850px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(160px, 0.85fr); gap: 12px; }
+  .avatar3d { left: auto; width: 100%; max-width: 500px; height: clamp(420px, 40vw, 600px); }
+  .calendar-position { position: static; transform: none; width: 100%; }
+  .calendar-card { width: 100%; max-width: 320px; padding: clamp(16px, 1.5vw, 25px); }
+  .calendar-card-header { flex-wrap: wrap; }
+  .calendar-card-header span { font-size: clamp(22px, 2vw, 30px); }
+  .calendar-card-date { font-size: clamp(18px, 1.5vw, 25px); }
+  .skills-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(32px, 5vw, 96px); }
+  .skills-card > h1, .skills-card > h2 { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .about-card { display: grid; grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1.4fr); column-gap: clamp(32px, 5vw, 96px); }
+  .about-card > .badge { grid-column: 1; grid-row: 1 / span 4; align-self: center; justify-self: center; }
+  .about-card > h2, .about-card > p { grid-column: 2; }
+}

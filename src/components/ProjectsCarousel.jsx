@@ -96,7 +96,7 @@ export default function ProjectsCarousel({ projects }) {
 
   return (
     <div className="projects-carousel" role="region" aria-roledescription="carrossel" aria-label="Projetos da Rayssa">
-      <div className="carousel-toolbar">
+      <div className="carousel-toolbar container">
         <p id="projects-carousel-help">Arraste para explorar os projetos.</p>
         <div className="carousel-controls">
           <button type="button" onClick={() => move(-1)} aria-label="Projeto anterior" aria-controls="projects-viewport">←</button>

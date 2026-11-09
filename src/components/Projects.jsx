@@ -61,7 +61,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projetos" className="projects container">
+    <section id="projetos" className="projects">
       <motion.div
         initial={{
           opacity: 0,
@@ -78,7 +78,7 @@ export default function Projects() {
           once: true,
         }}
       >
-        <h2>Meus Projetos</h2>
+        <h2 className="container">Meus Projetos</h2>
 
         <ProjectsCarousel projects={projetos} />
       </motion.div>

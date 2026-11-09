@@ -4,7 +4,7 @@
 .carousel-controls { display: flex; gap: 8px; }
 .carousel-controls button { min-width: 44px; min-height: 44px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--secondary); background: var(--surface); color: var(--text); font-size: 0.9rem; }
 .carousel-controls button:disabled { opacity: 0.7; cursor: default; }
-.carousel-viewport { --card-width: calc((100cqw - 72px) / 3.2); --carousel-gap: 24px; overflow-x: auto; overflow-y: hidden; position: relative; container-type: inline-size; scrollbar-width: none; overscroll-behavior-x: contain; overflow-anchor: none; cursor: grab; border-radius: 24px; }
+.carousel-viewport { --card-width: min(460px, calc((100cqw - 72px) / 3.2)); --carousel-gap: 24px; overflow-x: auto; overflow-y: hidden; position: relative; container-type: inline-size; scrollbar-width: none; overscroll-behavior-x: contain; overflow-anchor: none; cursor: grab; border-radius: 0; }
 .carousel-viewport::-webkit-scrollbar { display: none; }
 .carousel-viewport:active { cursor: grabbing; }
 .carousel-track { display: flex; gap: var(--carousel-gap); padding-block: 12px 24px; }
