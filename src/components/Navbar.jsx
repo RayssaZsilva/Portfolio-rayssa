@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -27,17 +27,42 @@ export default function Navbar() {
     };
   }, []);
 
+  const headerRef = useRef(null);
+  const toggleRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOutside = (event) => {
+      if (!headerRef.current?.contains(event.target)) setOpen(false);
+    };
+    const closeEscape = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    const closeOnResize = () => setOpen(false);
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeEscape);
+    window.addEventListener("resize", closeOnResize);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("keydown", closeEscape);
+      window.removeEventListener("resize", closeOnResize);
+    };
+  }, [open]);
+
   function goTo(id) {
     setOpen(false);
 
     document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
       block: "start",
     });
   }
 
   return (
-    <header className={`navbar ${scroll ? "navbar-scroll" : ""}`}>
+    <header ref={headerRef} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} className={`navbar ${scroll ? "navbar-scroll" : ""}`}>
       <div className="container navbar-content">
         <button
           className="logo"
@@ -50,6 +75,7 @@ export default function Navbar() {
         </button>
 
         <nav
+          id="primary-navigation"
           className={`menu ${open ? "active" : ""}`}
           aria-label="Navegação principal"
         >
@@ -65,6 +91,8 @@ export default function Navbar() {
         </nav>
 
         <button
+          ref={toggleRef}
+          aria-controls="primary-navigation"
           className="mobile-button"
           type="button"
           aria-label={open ? "Fechar menu" : "Abrir menu"}

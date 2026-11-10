@@ -1,4 +1,5 @@
 import "./index.css";
+import { MotionConfig } from "framer-motion";
 import Chatbot from "./components/Chatbot"
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -13,7 +14,7 @@ import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
-    <div className="app">
+    <MotionConfig reducedMotion="user"><div className="app">
       <Background />
       <CustomCursor />
 
@@ -29,7 +30,7 @@ function App() {
       </main>
 
       <Footer />
-    </div>
+    </div></MotionConfig>
   );
 }
 

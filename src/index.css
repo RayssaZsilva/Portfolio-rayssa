@@ -599,7 +599,7 @@ canvas {
 .social-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
+  gap: 20px;
   margin-top: 50px;
 }
 
@@ -609,13 +609,20 @@ canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: 0.3s;
   border: 2px solid #a78bfa;
   box-shadow: 0 0 20px rgba(167, 139, 250, 0.2);
+}
+
+.social-grid a img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .social-grid a:hover {
@@ -1236,7 +1243,7 @@ canvas {
     padding: 18px;
   }
 
-  /* 4 redes na mesma linha */
+  /* Redes sociais em telas pequenas */
   .social-grid {
     width: 100%;
     max-width: 340px;
@@ -1255,12 +1262,6 @@ canvas {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .social-grid a img {
-    width: 30px !important;
-    height: 30px;
-    object-fit: contain;
   }
 
   .social-grid a span {
@@ -1329,4 +1330,73 @@ canvas {
   height: 48px;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+/* Shared sizing: contain the source of overflow rather than hiding page content. */
+section[id] { scroll-margin-top: 100px; }
+:where(button, a, input):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.hero-left, .hero-right, .project-title { min-width: 0; }
+.projects-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); }
+.project-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
+.project-links a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--secondary); border-radius: 14px; }
+.primary, .secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
+.hero-glow { max-width: 100%; pointer-events: none; }
+
+@media (max-width: 950px) {
+  .hero-glow { left: 0; width: 100%; height: 240px; filter: blur(70px); }
+  .hero-social a { width: 44px; height: 44px; }
+  .about-card h2, .skills h2, .projects h2, .socials h2 { overflow-wrap: anywhere; }
+}
+@media (max-width: 768px) {
+  section[id] { scroll-margin-top: 84px; }
+  .menu { max-height: calc(100dvh - 92px); overflow-y: auto; overscroll-behavior: contain; }
+  .menu button { min-height: 44px; }
+}
+@media (max-width: 600px) {
+  .hero.container { width: calc(100% - 32px); }
+  .hero-focus { font-size: 0.95rem; line-height: 1.5; }
+  .hero-left p { font-size: 1rem; line-height: 1.65; }
+  .hero-buttons .primary, .hero-buttons .secondary { font-size: 0.9rem; white-space: normal; }
+  .hero-right { margin-top: 0; align-items: center; }
+  .avatar3d { animation: none; }
+  .techs span { max-width: 100%; overflow-wrap: anywhere; }
+  .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .social-grid a { min-height: 60px; padding: 8px; flex-direction: row; gap: 8px; }
+  .social-grid a img { width: 20px; height: 20px; }
+  .social-grid a span { display: inline; font-size: 0.95rem; }
+  .footer { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+  .project-card:hover, .social-grid a:hover, .primary:hover, .secondary:hover, .hero-social a:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .cursor { display: none; }
+}
+
+/* Fluid section shells; readable content keeps its own limits. */
+:root { --page-gutter: clamp(16px, 3vw, 64px); }
+.container, .hero.container { width: calc(100% - 2 * var(--page-gutter)); max-width: none; }
+.background { width: 100%; }
+.about-card p { max-width: 72ch; }
+.projects > div { min-width: 0; }
+@media (min-width: 951px) {
+  .hero { gap: clamp(24px, 3vw, 64px); }
+  .hero-left { flex: 1 1 48%; width: 48%; max-width: 680px; }
+  .hero-right { flex: 1 1 48%; width: auto; max-width: 850px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(160px, 0.85fr); gap: 12px; }
+  .avatar3d { left: auto; width: 100%; max-width: 500px; height: clamp(420px, 40vw, 600px); }
+  .calendar-position { position: static; transform: none; width: 100%; }
+  .calendar-card { width: 100%; max-width: 320px; padding: clamp(16px, 1.5vw, 25px); }
+  .calendar-card-header { flex-wrap: wrap; }
+  .calendar-card-header span { font-size: clamp(22px, 2vw, 30px); }
+  .calendar-card-date { font-size: clamp(18px, 1.5vw, 25px); }
+  .skills-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(32px, 5vw, 96px); }
+  .skills-card > h1, .skills-card > h2 { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .about-card { display: grid; grid-template-columns: minmax(220px, 0.6fr) minmax(0, 1.4fr); column-gap: clamp(32px, 5vw, 96px); }
+  .about-card > .badge { grid-column: 1; grid-row: 1 / span 4; align-self: center; justify-self: center; }
+  .about-card > h2, .about-card > p { grid-column: 2; }
 }

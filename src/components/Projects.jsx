@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ProjectCard from "./ProjectCard";
+import ProjectsCarousel from "./ProjectsCarousel";
 
 export default function Projects() {
   const projetos = [
@@ -61,7 +61,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projetos" className="projects container">
+    <section id="projetos" className="projects">
       <motion.div
         initial={{
           opacity: 0,
@@ -78,16 +78,7 @@ export default function Projects() {
           once: true,
         }}
       >
-        <h2>Meus Projetos</h2>
-
-        <div className="projects-grid">
-          {projetos.map((projeto) => (
-            <ProjectCard
-              key={projeto.titulo}
-              {...projeto}
-            />
-          ))}
-        </div>
+        <ProjectsCarousel projects={projetos} />
       </motion.div>
     </section>
   );

@@ -42,6 +42,35 @@ export default function Chatbot() {
   const [messages, setMessages] = useState(loadMessages);
   const messagesEndRef = useRef(null);
   const sendingRef = useRef(false);
+  const windowRef = useRef(null);
+  const launcherRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const viewport = window.visualViewport;
+    const updateViewport = () => {
+      const panel = windowRef.current;
+      if (!panel) return;
+      panel.style.setProperty("--chat-visible-height", `${viewport?.height ?? window.innerHeight}px`);
+      panel.style.setProperty("--chat-visible-top", `${viewport?.offsetTop ?? 0}px`);
+    };
+    updateViewport();
+    viewport?.addEventListener("resize", updateViewport);
+    viewport?.addEventListener("scroll", updateViewport);
+    window.addEventListener("resize", updateViewport);
+    // Focus the close control without opening the virtual keyboard automatically.
+    windowRef.current?.querySelector(".chatbot-close")?.focus({ preventScroll: true });
+    return () => {
+      viewport?.removeEventListener("resize", updateViewport);
+      viewport?.removeEventListener("scroll", updateViewport);
+      window.removeEventListener("resize", updateViewport);
+    };
+  }, [isOpen]);
+
+  const closeChat = () => {
+    setIsOpen(false);
+    requestAnimationFrame(() => launcherRef.current?.focus({ preventScroll: true }));
+  };
 
   useEffect(() => {
     try {
@@ -56,7 +85,10 @@ export default function Chatbot() {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (isOpen) {
+      const scroller = messagesEndRef.current?.parentElement;
+      scroller?.scrollTo({ top: scroller.scrollHeight, behavior: "instant" });
+    }
   }, [messages, isLoading, isOpen]);
 
   const clearChat = () => {
@@ -120,6 +152,8 @@ export default function Chatbot() {
     <>
       {!isOpen && (
         <button
+          ref={launcherRef}
+          aria-haspopup="dialog"
           className="chatbot-button"
           onClick={() => setIsOpen(true)}
           aria-label="Abrir chat"
@@ -134,13 +168,14 @@ export default function Chatbot() {
       )}
 
       {isOpen && (
-        <div className="chatbot-window">
+        <div ref={windowRef} className="chatbot-window" role="dialog" aria-labelledby="rai-title"
+          onKeyDown={(event) => { if (event.key === "Escape") closeChat(); }}>
           <div className="chatbot-header">
             <div className="chatbot-title">
               <span className="chatbot-icon">🪼</span>
 
               <div>
-                <h2>Assistente rAI </h2>
+                <h2 id="rai-title">Assistente rAI </h2>
                 <p>Assistente virtual • Portfólio</p>
               </div>
             </div>
@@ -159,7 +194,7 @@ export default function Chatbot() {
 
               <button
                 className="chatbot-close"
-                onClick={() => setIsOpen(false)}
+                onClick={closeChat}
                 aria-label="Fechar assistente"
               >
                 ×
@@ -167,7 +202,7 @@ export default function Chatbot() {
             </div>
           </div>
 
-          <div className="chatbot-messages">
+          <div className="chatbot-messages" role="log" aria-label="Conversa com rAI" aria-live="polite">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -223,6 +258,7 @@ export default function Chatbot() {
             }}
           >
             <input
+              aria-label="Mensagem para rAI"
               className="chatbot-input"
               type="text"
               value={message}
